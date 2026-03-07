@@ -12,3 +12,5 @@ local settings = {
         RedactPfp = false
     }
 }
+
+return settings
