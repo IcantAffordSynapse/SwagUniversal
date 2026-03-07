@@ -1,0 +1,4 @@
+local savedData = {
+    favouritedScripts = {},
+    clientScripts = {}
+}
