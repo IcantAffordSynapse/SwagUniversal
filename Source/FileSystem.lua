@@ -52,23 +52,23 @@ local files = {
     ["Settings.lua"] = loadstring(game:HttpGet("https://raw.githubusercontent.com/IcantAffordSynapse/SwagUniversal/refs/heads/main/Templates/Settings.lua"))()
 }
 
-if not isFolder("SWAG__UNIVERSAL") then
-    makeFolder("SWAG__UNIVERSAL")
+if not isfile("SWAG__UNIVERSAL") then
+    makefolder("SWAG__UNIVERSAL")
 end
 
 for name, templateTable in pairs(files) do
     local path = "SWAG__UNIVERSAL/" .. name
 
-    if not isFile(path) then
-        writeFile(path, "return "..serialize(templateTable))
+    if not isfile(path) then
+        writefile(path, "return "..serialize(templateTable))
     else
-        local success, userTable = pcall(loadstring(readFile(path)))
+        local success, userTable = pcall(loadstring(readfile(path)))
 
         if success and type(userTable) == "table" then
             deepVerify(templateTable, userTable)
-            writeFile(path, "return "..serialize(userTable))
+            writefile(path, "return "..serialize(userTable))
         else
-            writeFile(path, "return "..serialize(templateTable))
+            writefile(path, "return "..serialize(templateTable))
         end
     end
 end
