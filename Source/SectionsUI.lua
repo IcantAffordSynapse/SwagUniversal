@@ -2,6 +2,7 @@
 -- 08/03/2026
 
 local UI = {}
+local TweenService = game:GetService("TweenService")
 
 function UI:CreateSettings(parent)
     local SettingsSectionFrame = Instance.new("Frame")
@@ -170,6 +171,36 @@ function UI:CreateSettings(parent)
     DividerElement.Parent = SettingDividerFrame
 
     local Elements = {}
+
+    function Elements:Open()
+        SettingsSectionFrame.Visible = true
+
+        local info = TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+
+        TweenService:Create(SettingsSectionFrame, info, {BackgroundTransparency = 0}):Play()
+
+        for _, child in ipairs(SettingsSectionFrame:GetChildren()) do
+            if child:IsA("TextLabel") or child:IsA("ImageLabel") or child:IsA("ImageButton") or child:IsA("Frame") then
+                TweenService:Create(child, info, {BackgroundTransparency = 0, TextTransparency = 0, ImageTransparency = 0}):Play()
+            end
+        end
+    end
+
+    function Elements:Close()
+        local info = TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+
+        TweenService:Create(SettingsSectionFrame, info, {BackgroundTransparency = 1}):Play()
+
+        for _, child in ipairs(SettingsSectionFrame:GetChildren()) do
+            if child:IsA("TextLabel") or child:IsA("ImageLabel") or child:IsA("ImageButton") or child:IsA("Frame") then
+                TweenService:Create(child, info, {BackgroundTransparency = 1, TextTransparency = 1, ImageTransparency = 1}):Play()
+            end
+        end
+        
+        delay(0.4, function()
+            SettingsSectionFrame.Visible = false
+        end)
+    end
 
     function Elements:Toggle(name, def, cb)
         local toggled = def or false
