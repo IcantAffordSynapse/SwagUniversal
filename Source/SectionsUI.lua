@@ -196,8 +196,8 @@ function UI:CreateSettings(parent)
             local connection
             connection = game:GetService("UserInputService").InputBegan:Connect(function(input, processed)
                 if not processed and input.UserInputType == Enum.UserInputType.Keyboard then
-                    local keyPressed = input.KeyCode.Name
-                    KeyBindInput.Text = keyPressed
+                    local keyPressed = input.KeyCode
+                    KeyBindInput.Text = keyPressed.Name
                     if cb then
                         cb(keyPressed)
                     end
