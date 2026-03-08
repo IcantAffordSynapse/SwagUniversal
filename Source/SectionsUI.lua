@@ -71,6 +71,10 @@ function UI:CreateSettings(parent)
     UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
     UIListLayout.Parent = SettingsContainerSF
 
+    CloseSettingsBtn.MouseButton1Click:Connect(function()
+        SettingsSectionFrame.Visible = false
+    end)
+
     local Elements = {}
 
     function Elements:Open()
