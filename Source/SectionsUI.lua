@@ -71,171 +71,30 @@ function UI:CreateSettings(parent)
     UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
     UIListLayout.Parent = SettingsContainerSF
 
-    local SettingKeybindFrame = Instance.new("Frame")
-    SettingKeybindFrame.BackgroundTransparency = 1
-    SettingKeybindFrame.Name = "SettingKeybindFrame"
-    SettingKeybindFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    SettingKeybindFrame.Size = UDim2.new(0, 269, 0, 25)
-    SettingKeybindFrame.BorderSizePixel = 0
-    SettingKeybindFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    SettingKeybindFrame.Parent = SettingsContainerSF
-
-    local SettingTitle = Instance.new("TextLabel")
-    SettingTitle.TextWrapped = true
-    SettingTitle.Name = "SettingTitle"
-    SettingTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-    SettingTitle.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    SettingTitle.Text = "This is a Keybind Setting"
-    SettingTitle.Size = UDim2.new(0, 216, 0, 18)
-    SettingTitle.Position = UDim2.new(0, 0, 0.5, 0)
-    SettingTitle.AnchorPoint = Vector2.new(0, 0.5)
-    SettingTitle.BorderSizePixel = 0
-    SettingTitle.BackgroundTransparency = 1
-    SettingTitle.TextXAlignment = Enum.TextXAlignment.Left
-    SettingTitle.TextScaled = true
-    SettingTitle.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-    SettingTitle.TextSize = 14
-    SettingTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    SettingTitle.Parent = SettingKeybindFrame
-
-    local KeyBindIco = Instance.new("ImageLabel")
-    KeyBindIco.BorderColor3 = Color3.fromRGB(27, 42, 53)
-    KeyBindIco.Name = "KeyBindIco"
-    KeyBindIco.Size = UDim2.new(0, 25, 0, 25)
-    KeyBindIco.AnchorPoint = Vector2.new(1, 0.5)
-    KeyBindIco.Image = "rbxassetid://10791872163"
-    KeyBindIco.BackgroundTransparency = 1
-    KeyBindIco.ImageRectSize = Vector2.new(108, 108)
-    KeyBindIco.Position = UDim2.new(1, 0, 0.5, 0)
-    KeyBindIco.ImageRectOffset = Vector2.new(592, 220)
-    KeyBindIco.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    KeyBindIco.Parent = SettingKeybindFrame
-
-    local KeyBindInput = Instance.new("TextLabel")
-    KeyBindInput.TextWrapped = true
-    KeyBindInput.TextColor3 = Color3.fromRGB(255, 255, 255)
-    KeyBindInput.BorderColor3 = Color3.fromRGB(27, 42, 53)
-    KeyBindInput.Text = "E"
-    KeyBindInput.Name = "KeyBindInput"
-    KeyBindInput.AnchorPoint = Vector2.new(0.5, 0)
-    KeyBindInput.Size = UDim2.new(0.75, 0, 0.699999988079071, 0)
-    KeyBindInput.BackgroundTransparency = 1
-    KeyBindInput.Position = UDim2.new(0.5, 0, 0.10000000149011612, 0)
-    KeyBindInput.FontFace = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-    KeyBindInput.TextSize = 20
-    KeyBindInput.TextScaled = true
-    KeyBindInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    KeyBindInput.Parent = KeyBindIco
-
-    local KeyBindInputPadding = Instance.new("UIPadding")
-    KeyBindInputPadding.PaddingBottom = UDim.new(0.10000000149011612, 0)
-    KeyBindInputPadding.PaddingTop = UDim.new(0.10000000149011612, 0)
-    KeyBindInputPadding.Name = "KeyBindInputPadding"
-    KeyBindInputPadding.Parent = KeyBindInput
-
-    local SettingDividerFrame = Instance.new("Frame")
-    SettingDividerFrame.BackgroundTransparency = 1
-    SettingDividerFrame.Name = "SettingDividerFrame"
-    SettingDividerFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    SettingDividerFrame.Size = UDim2.new(0, 269, 0, 25)
-    SettingDividerFrame.BorderSizePixel = 0
-    SettingDividerFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    SettingDividerFrame.Parent = SettingsContainerSF
-
-    local DividerTitle = Instance.new("TextLabel")
-    DividerTitle.TextWrapped = true
-    DividerTitle.Name = "DividerTitle"
-    DividerTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-    DividerTitle.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    DividerTitle.Text = "Divider"
-    DividerTitle.Size = UDim2.new(0, 98, 0, 16)
-    DividerTitle.Position = UDim2.new(0, 0, 0.5, 0)
-    DividerTitle.AnchorPoint = Vector2.new(0, 0.5)
-    DividerTitle.BorderSizePixel = 0
-    DividerTitle.BackgroundTransparency = 1
-    DividerTitle.TextXAlignment = Enum.TextXAlignment.Left
-    DividerTitle.TextScaled = true
-    DividerTitle.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-    DividerTitle.TextSize = 14
-    DividerTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    DividerTitle.Parent = SettingDividerFrame
-
-    local DividerElement = Instance.new("Frame")
-    DividerElement.AnchorPoint = Vector2.new(1, 0.5)
-    DividerElement.Name = "DividerElement"
-    DividerElement.Position = UDim2.new(1, 0, 0.5, 0)
-    DividerElement.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    DividerElement.Size = UDim2.new(0, 157, 0, 1)
-    DividerElement.BorderSizePixel = 0
-    DividerElement.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    DividerElement.Parent = SettingDividerFrame
-
     local Elements = {}
-
-    local lastCloseTime = 0
-    local fadeDuration = 0.4
-
-    local function FadeContents(frame, targetTransparency)
-        local info = TweenInfo.new(fadeDuration, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-
-        for _, child in ipairs(frame:GetChildren()) do
-            local tweenProps = {}
-            if child:IsA("TextLabel") then
-                tweenProps.TextTransparency = targetTransparency
-                tweenProps.BackgroundTransparency = targetTransparency
-            elseif child:IsA("ImageLabel") or child:IsA("ImageButton") then
-                tweenProps.ImageTransparency = targetTransparency
-                tweenProps.BackgroundTransparency = targetTransparency
-            end
-
-            if next(tweenProps) then
-                TweenService:Create(child, info, tweenProps):Play()
-            end
-
-            if child:IsA("Frame") or child:IsA("ScrollingFrame") then
-                FadeContents(child, targetTransparency)
-            end
-        end
-    end
 
     function Elements:Open()
         SettingsSectionFrame.Visible = true
-        local info = TweenInfo.new(fadeDuration, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-
-        TweenService:Create(SettingsSectionFrame, info, {BackgroundTransparency = 0}):Play()
-
-        FadeContents(SettingsSectionFrame, 0)
     end
 
     function Elements:Close()
-        local closeTime = tick()
-        lastCloseTime = closeTime
-        local info = TweenInfo.new(fadeDuration, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-
-        TweenService:Create(SettingsSectionFrame, info, {BackgroundTransparency = 1}):Play()
-
-        FadeContents(SettingsSectionFrame, 1)
-
-        delay(fadeDuration, function()
-            if lastCloseTime == closeTime then
-                SettingsSectionFrame.Visible = false
-            end
-        end)
+        SettingsSectionFrame.Visible = false
     end
 
     function Elements:Toggle(name, def, cb)
         local toggled = def or false
 
-        local SettingToggleFrame = Instance.new("Frame")
+        local SettingToggleFrame = Instance.new("TextButton")
         SettingToggleFrame.Name = "SettingToggleFrame"
         SettingToggleFrame.Size = UDim2.new(0, 269, 0, 25)
         SettingToggleFrame.BackgroundTransparency = 1
         SettingToggleFrame.BorderSizePixel = 0
+        SettingToggleFrame.TextTransparency = 1
         SettingToggleFrame.Parent = SettingsContainerSF
 
         local SettingTitle = Instance.new("TextLabel")
         SettingTitle.Name = "SettingTitle"
-        SettingTitle.Text = name or "Toggle Setting"
+        SettingTitle.Text = name
         SettingTitle.Size = UDim2.new(0, 216, 0, 18)
         SettingTitle.Position = UDim2.new(0, 0, 0.5, 0)
         SettingTitle.AnchorPoint = Vector2.new(0, 0.5)
@@ -259,7 +118,6 @@ function UI:CreateSettings(parent)
         STICorner.CornerRadius = UDim.new(1, 0)
         STICorner.Parent = SettingToggledIndicator
 
-        SettingToggleFrame.MouseButton1Click = SettingToggleFrame.MouseButton1Click or Instance.new("BindableEvent")
         SettingToggleFrame.MouseButton1Click:Connect(function()
             toggled = not toggled
             SettingToggledIndicator.BackgroundColor3 = toggled and Color3.fromRGB(80, 255, 80) or Color3.fromRGB(255, 80, 80)
@@ -267,6 +125,125 @@ function UI:CreateSettings(parent)
                 cb(toggled)
             end
         end)
+    end
+
+    function Elements:Keybind(name, def, cb)
+        local SettingKeybindFrame = Instance.new("TextButton")
+        SettingKeybindFrame.BackgroundTransparency = 1
+        SettingKeybindFrame.Name = "SettingKeybindFrame"
+        SettingKeybindFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        SettingKeybindFrame.Size = UDim2.new(0, 269, 0, 25)
+        SettingKeybindFrame.BorderSizePixel = 0
+        SettingKeybindFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        SettingKeybindFrame.TextTransparency = 1
+        SettingKeybindFrame.Parent = SettingsContainerSF
+
+        local SettingTitle = Instance.new("TextLabel")
+        SettingTitle.TextWrapped = true
+        SettingTitle.Name = "SettingTitle"
+        SettingTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+        SettingTitle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        SettingTitle.Text = name
+        SettingTitle.Size = UDim2.new(0, 216, 0, 18)
+        SettingTitle.Position = UDim2.new(0, 0, 0.5, 0)
+        SettingTitle.AnchorPoint = Vector2.new(0, 0.5)
+        SettingTitle.BorderSizePixel = 0
+        SettingTitle.BackgroundTransparency = 1
+        SettingTitle.TextXAlignment = Enum.TextXAlignment.Left
+        SettingTitle.TextScaled = true
+        SettingTitle.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+        SettingTitle.TextSize = 14
+        SettingTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        SettingTitle.Parent = SettingKeybindFrame
+
+        local KeyBindIco = Instance.new("ImageLabel")
+        KeyBindIco.BorderColor3 = Color3.fromRGB(27, 42, 53)
+        KeyBindIco.Name = "KeyBindIco"
+        KeyBindIco.Size = UDim2.new(0, 25, 0, 25)
+        KeyBindIco.AnchorPoint = Vector2.new(1, 0.5)
+        KeyBindIco.Image = "rbxassetid://10791872163"
+        KeyBindIco.BackgroundTransparency = 1
+        KeyBindIco.ImageRectSize = Vector2.new(108, 108)
+        KeyBindIco.Position = UDim2.new(1, 0, 0.5, 0)
+        KeyBindIco.ImageRectOffset = Vector2.new(592, 220)
+        KeyBindIco.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        KeyBindIco.Parent = SettingKeybindFrame
+
+        local KeyBindInput = Instance.new("TextLabel")
+        KeyBindInput.TextWrapped = true
+        KeyBindInput.TextColor3 = Color3.fromRGB(255, 255, 255)
+        KeyBindInput.BorderColor3 = Color3.fromRGB(27, 42, 53)
+        KeyBindInput.Text = "E"
+        KeyBindInput.Name = "KeyBindInput"
+        KeyBindInput.AnchorPoint = Vector2.new(0.5, 0)
+        KeyBindInput.Size = UDim2.new(0.75, 0, 0.699999988079071, 0)
+        KeyBindInput.BackgroundTransparency = 1
+        KeyBindInput.Position = UDim2.new(0.5, 0, 0.10000000149011612, 0)
+        KeyBindInput.FontFace = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+        KeyBindInput.TextSize = 20
+        KeyBindInput.TextScaled = true
+        KeyBindInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        KeyBindInput.Parent = KeyBindIco
+
+        local KeyBindInputPadding = Instance.new("UIPadding")
+        KeyBindInputPadding.PaddingBottom = UDim.new(0.10000000149011612, 0)
+        KeyBindInputPadding.PaddingTop = UDim.new(0.10000000149011612, 0)
+        KeyBindInputPadding.Name = "KeyBindInputPadding"
+        KeyBindInputPadding.Parent = KeyBindInput
+
+        SettingKeybindFrame.MouseButton1Click:Connect(function()
+            KeyBindInput.Text = "..."
+            local connection
+            connection = game:GetService("UserInputService").InputBegan:Connect(function(input, processed)
+                if not processed and input.UserInputType == Enum.UserInputType.Keyboard then
+                    local keyPressed = input.KeyCode.Name
+                    KeyBindInput.Text = keyPressed
+                    if cb then
+                        cb(keyPressed)
+                    end
+                    connection:Disconnect()
+                end
+            end)
+        end)
+    end
+
+    function Elements:Divider(txt)
+        local SettingDividerFrame = Instance.new("Frame")
+        SettingDividerFrame.BackgroundTransparency = 1
+        SettingDividerFrame.Name = "SettingDividerFrame"
+        SettingDividerFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        SettingDividerFrame.Size = UDim2.new(0, 269, 0, 25)
+        SettingDividerFrame.BorderSizePixel = 0
+        SettingDividerFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        SettingDividerFrame.Parent = SettingsContainerSF
+
+        local DividerTitle = Instance.new("TextLabel")
+        DividerTitle.TextWrapped = true
+        DividerTitle.Name = "DividerTitle"
+        DividerTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+        DividerTitle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        DividerTitle.Text = txt
+        DividerTitle.Size = UDim2.new(0, 98, 0, 16)
+        DividerTitle.Position = UDim2.new(0, 0, 0.5, 0)
+        DividerTitle.AnchorPoint = Vector2.new(0, 0.5)
+        DividerTitle.BorderSizePixel = 0
+        DividerTitle.BackgroundTransparency = 1
+        DividerTitle.TextXAlignment = Enum.TextXAlignment.Left
+        DividerTitle.TextScaled = true
+        DividerTitle.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+        DividerTitle.TextSize = 14
+        DividerTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        DividerTitle.Parent = SettingDividerFrame
+
+        local DividerElement = Instance.new("Frame")
+        DividerElement.AnchorPoint = Vector2.new(1, 0.5)
+        DividerElement.Name = "DividerElement"
+        DividerElement.Position = UDim2.new(1, 0, 0.5, 0)
+        DividerElement.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        DividerElement.Size = UDim2.new(0, 157, 0, 1)
+        DividerElement.BorderSizePixel = 0
+        DividerElement.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        DividerElement.Parent = SettingDividerFrame
     end
 
     return Elements
