@@ -1,5 +1,5 @@
 -- SWAG Universal File System
--- 07/03/2026
+-- 08/03/2026
 
 if not getgenv().FileSystemFuncs then 
     return "File System Unsupported." 
@@ -40,8 +40,21 @@ local function serialize(value, indent)
             str = str .. spacing.."    "..key.." = "..serialize(v, indent + 1)..",\n"
         end
         return str .. spacing.."}"
+
+    elseif typeof(value) == "Color3" then
+        return string.format(
+            "Color3.fromRGB(%d, %d, %d)",
+            math.floor(value.R * 255),
+            math.floor(value.G * 255),
+            math.floor(value.B * 255)
+        )
+
+    elseif typeof(value) == "EnumItem" then
+        return tostring(value)
+
     elseif type(value) == "string" then
         return string.format("%q", value)
+
     else
         return tostring(value)
     end
