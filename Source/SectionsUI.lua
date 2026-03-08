@@ -174,29 +174,50 @@ function UI:CreateSettings(parent)
 
     function Elements:Open()
         SettingsSectionFrame.Visible = true
-
         local info = TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
 
-        TweenService:Create(SettingsSectionFrame, info, {BackgroundTransparency = 0}):Play()
-
         for _, child in ipairs(SettingsSectionFrame:GetChildren()) do
-            if child:IsA("TextLabel") or child:IsA("ImageLabel") or child:IsA("ImageButton") or child:IsA("Frame") then
-                TweenService:Create(child, info, {BackgroundTransparency = 0, TextTransparency = 0, ImageTransparency = 0}):Play()
+            local tweenProps = {}
+            if child:IsA("TextLabel") then
+                tweenProps.TextTransparency = 0
+                tweenProps.BackgroundTransparency = 0
+            elseif child:IsA("ImageLabel") or child:IsA("ImageButton") then
+                tweenProps.ImageTransparency = 0
+                tweenProps.BackgroundTransparency = 0
+            elseif child:IsA("Frame") then
+                tweenProps.BackgroundTransparency = 0
+            end
+
+            if next(tweenProps) then
+                TweenService:Create(child, info, tweenProps):Play()
             end
         end
+
+        TweenService:Create(SettingsSectionFrame, info, {BackgroundTransparency = 0}):Play()
     end
 
     function Elements:Close()
         local info = TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
 
-        TweenService:Create(SettingsSectionFrame, info, {BackgroundTransparency = 1}):Play()
-
         for _, child in ipairs(SettingsSectionFrame:GetChildren()) do
-            if child:IsA("TextLabel") or child:IsA("ImageLabel") or child:IsA("ImageButton") or child:IsA("Frame") then
-                TweenService:Create(child, info, {BackgroundTransparency = 1, TextTransparency = 1, ImageTransparency = 1}):Play()
+            local tweenProps = {}
+            if child:IsA("TextLabel") then
+                tweenProps.TextTransparency = 1
+                tweenProps.BackgroundTransparency = 1
+            elseif child:IsA("ImageLabel") or child:IsA("ImageButton") then
+                tweenProps.ImageTransparency = 1
+                tweenProps.BackgroundTransparency = 1
+            elseif child:IsA("Frame") then
+                tweenProps.BackgroundTransparency = 1
+            end
+
+            if next(tweenProps) then
+                TweenService:Create(child, info, tweenProps):Play()
             end
         end
-        
+
+        TweenService:Create(SettingsSectionFrame, info, {BackgroundTransparency = 1}):Play()
+
         delay(0.4, function()
             SettingsSectionFrame.Visible = false
         end)
