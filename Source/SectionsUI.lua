@@ -3,6 +3,52 @@
 
 local UI = {}
 local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+
+local function dragify(Frame)
+    local dragToggle = false
+    local dragInput = nil
+    local dragStart = nil
+    local startPos = nil
+    local dragSpeed = 0.05
+
+    local function updateInput(input)
+        local delta = input.Position - dragStart
+        local newPos = UDim2.new(
+            startPos.X.Scale, startPos.X.Offset + delta.X,
+            startPos.Y.Scale, startPos.Y.Offset + delta.Y
+        )
+        TweenService:Create(Frame, TweenInfo.new(dragSpeed), {Position = newPos}):Play()
+    end
+
+    Frame.InputBegan:Connect(function(input)
+        if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) 
+            and UserInputService:GetFocusedTextBox() == nil then
+
+            dragToggle = true
+            dragStart = input.Position
+            startPos = Frame.Position
+
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragToggle = false
+                end
+            end)
+        end
+    end)
+
+    Frame.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            dragInput = input
+        end
+    end)
+
+    UserInputService.InputChanged:Connect(function(input)
+        if input == dragInput and dragToggle then
+            updateInput(input)
+        end
+    end)
+end
 
 function UI:CreateSettings(parent)
     local SettingsSectionFrame = Instance.new("Frame")
@@ -14,6 +60,7 @@ function UI:CreateSettings(parent)
     SettingsSectionFrame.BorderSizePixel = 0
     SettingsSectionFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     SettingsSectionFrame.Parent = parent
+    SettingsSectionFrame.Visible = false
 
     local SettingsSectionCorner = Instance.new("UICorner")
     SettingsSectionCorner.Name = "SettingsSectionCorner"
@@ -70,6 +117,8 @@ function UI:CreateSettings(parent)
     UIListLayout.Padding = UDim.new(0, 4)
     UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
     UIListLayout.Parent = SettingsContainerSF
+
+    dragify(SettingsSectionFrame)
 
     CloseSettingsBtn.MouseButton1Click:Connect(function()
         SettingsSectionFrame.Visible = false
@@ -198,7 +247,7 @@ function UI:CreateSettings(parent)
         SettingKeybindFrame.MouseButton1Click:Connect(function()
             KeyBindInput.Text = "..."
             local connection
-            connection = game:GetService("UserInputService").InputBegan:Connect(function(input, processed)
+            connection = UserInputService.InputBegan:Connect(function(input, processed)
                 if not processed and input.UserInputType == Enum.UserInputType.Keyboard then
                     local keyPressed = input.KeyCode
                     KeyBindInput.Text = keyPressed.Name
