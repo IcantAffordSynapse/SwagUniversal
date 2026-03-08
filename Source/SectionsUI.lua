@@ -172,11 +172,14 @@ function UI:CreateSettings(parent)
 
     local Elements = {}
 
+    local lastCloseTime = 0
+    local fadeDuration = 0.4
+
     function Elements:Open()
         SettingsSectionFrame.Visible = true
-        local info = TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+        local info = TweenInfo.new(fadeDuration, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
 
-        for _, child in ipairs(SettingsSectionFrame:GetChildren()) do
+        for _, child in ipairs(SettingsSectionFrame:GetDescendants()) do
             local tweenProps = {}
             if child:IsA("TextLabel") then
                 tweenProps.TextTransparency = 0
@@ -195,9 +198,11 @@ function UI:CreateSettings(parent)
     end
 
     function Elements:Close()
-        local info = TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+        local closeTime = tick()
+        lastCloseTime = closeTime
+        local info = TweenInfo.new(fadeDuration, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
 
-        for _, child in ipairs(SettingsSectionFrame:GetChildren()) do
+        for _, child in ipairs(SettingsSectionFrame:GetDescendants()) do
             local tweenProps = {}
             if child:IsA("TextLabel") then
                 tweenProps.TextTransparency = 1
@@ -216,8 +221,10 @@ function UI:CreateSettings(parent)
 
         TweenService:Create(SettingsSectionFrame, info, {BackgroundTransparency = 1}):Play()
 
-        delay(0.4, function()
-            SettingsSectionFrame.Visible = false
+        delay(fadeDuration, function()
+            if lastCloseTime == closeTime then
+                SettingsSectionFrame.Visible = false
+            end
         end)
     end
 
