@@ -175,26 +175,37 @@ function UI:CreateSettings(parent)
     local lastCloseTime = 0
     local fadeDuration = 0.4
 
-    function Elements:Open()
-        SettingsSectionFrame.Visible = true
+    local function FadeChildren(frame, targetTransparency)
         local info = TweenInfo.new(fadeDuration, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
 
-        for _, child in ipairs(SettingsSectionFrame:GetDescendants()) do
+        for _, child in ipairs(frame:GetChildren()) do
             local tweenProps = {}
+
             if child:IsA("TextLabel") then
-                tweenProps.TextTransparency = 0
+                tweenProps.TextTransparency = targetTransparency
+                tweenProps.BackgroundTransparency = targetTransparency
             elseif child:IsA("ImageLabel") or child:IsA("ImageButton") then
-                tweenProps.ImageTransparency = 0
-            elseif child:IsA("Frame") then
-                tweenProps.BackgroundTransparency = 0
+                tweenProps.ImageTransparency = targetTransparency
+                tweenProps.BackgroundTransparency = targetTransparency
             end
 
             if next(tweenProps) then
                 TweenService:Create(child, info, tweenProps):Play()
             end
+
+            if child:IsA("Frame") then
+                FadeChildren(child, targetTransparency)
+            end
         end
+    end
+
+    function Elements:Open()
+        SettingsSectionFrame.Visible = true
+        local info = TweenInfo.new(fadeDuration, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
 
         TweenService:Create(SettingsSectionFrame, info, {BackgroundTransparency = 0}):Play()
+
+        FadeChildren(SettingsSectionFrame, 0)
     end
 
     function Elements:Close()
@@ -202,24 +213,9 @@ function UI:CreateSettings(parent)
         lastCloseTime = closeTime
         local info = TweenInfo.new(fadeDuration, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
 
-        for _, child in ipairs(SettingsSectionFrame:GetDescendants()) do
-            local tweenProps = {}
-            if child:IsA("TextLabel") then
-                tweenProps.TextTransparency = 1
-                tweenProps.BackgroundTransparency = 1
-            elseif child:IsA("ImageLabel") or child:IsA("ImageButton") then
-                tweenProps.ImageTransparency = 1
-                tweenProps.BackgroundTransparency = 1
-            elseif child:IsA("Frame") then
-                tweenProps.BackgroundTransparency = 1
-            end
-
-            if next(tweenProps) then
-                TweenService:Create(child, info, tweenProps):Play()
-            end
-        end
-
         TweenService:Create(SettingsSectionFrame, info, {BackgroundTransparency = 1}):Play()
+
+        FadeChildren(SettingsSectionFrame, 1)
 
         delay(fadeDuration, function()
             if lastCloseTime == closeTime then
