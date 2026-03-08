@@ -183,10 +183,8 @@ function UI:CreateSettings(parent)
 
             if child:IsA("TextLabel") then
                 tweenProps.TextTransparency = targetTransparency
-                tweenProps.BackgroundTransparency = targetTransparency
             elseif child:IsA("ImageLabel") or child:IsA("ImageButton") then
                 tweenProps.ImageTransparency = targetTransparency
-                tweenProps.BackgroundTransparency = targetTransparency
             end
 
             if next(tweenProps) then
