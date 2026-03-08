@@ -180,10 +180,8 @@ function UI:CreateSettings(parent)
             local tweenProps = {}
             if child:IsA("TextLabel") then
                 tweenProps.TextTransparency = 0
-                tweenProps.BackgroundTransparency = 0
             elseif child:IsA("ImageLabel") or child:IsA("ImageButton") then
                 tweenProps.ImageTransparency = 0
-                tweenProps.BackgroundTransparency = 0
             elseif child:IsA("Frame") then
                 tweenProps.BackgroundTransparency = 0
             end
