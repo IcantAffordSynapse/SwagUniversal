@@ -3,7 +3,7 @@
 
 local UI = {}
 
-function UI:CreateSettings()
+function UI:CreateSettings(parent)
     local SettingsSectionFrame = Instance.new("Frame")
     SettingsSectionFrame.AnchorPoint = Vector2.new(0.5, 0.5)
     SettingsSectionFrame.Name = "SettingsSectionFrame"
@@ -12,6 +12,7 @@ function UI:CreateSettings()
     SettingsSectionFrame.Size = UDim2.new(0, 326, 0, 369)
     SettingsSectionFrame.BorderSizePixel = 0
     SettingsSectionFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    SettingsSectionFrame.Parent = parent
 
     local SettingsSectionCorner = Instance.new("UICorner")
     SettingsSectionCorner.Name = "SettingsSectionCorner"
@@ -68,48 +69,6 @@ function UI:CreateSettings()
     UIListLayout.Padding = UDim.new(0, 4)
     UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
     UIListLayout.Parent = SettingsContainerSF
-
-    local SettingToggleFrame = Instance.new("Frame")
-    SettingToggleFrame.BackgroundTransparency = 1
-    SettingToggleFrame.Name = "SettingToggleFrame"
-    SettingToggleFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    SettingToggleFrame.Size = UDim2.new(0, 269, 0, 25)
-    SettingToggleFrame.BorderSizePixel = 0
-    SettingToggleFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    SettingToggleFrame.Parent = SettingsContainerSF
-
-    local SettingTitle = Instance.new("TextLabel")
-    SettingTitle.TextWrapped = true
-    SettingTitle.Name = "SettingTitle"
-    SettingTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-    SettingTitle.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    SettingTitle.Text = "This is a Toggle Setting"
-    SettingTitle.Size = UDim2.new(0, 216, 0, 18)
-    SettingTitle.Position = UDim2.new(0, 0, 0.5, 0)
-    SettingTitle.AnchorPoint = Vector2.new(0, 0.5)
-    SettingTitle.BorderSizePixel = 0
-    SettingTitle.BackgroundTransparency = 1
-    SettingTitle.TextXAlignment = Enum.TextXAlignment.Left
-    SettingTitle.TextScaled = true
-    SettingTitle.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-    SettingTitle.TextSize = 14
-    SettingTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    SettingTitle.Parent = SettingToggleFrame
-
-    local SettingToggledIndicator = Instance.new("Frame")
-    SettingToggledIndicator.AnchorPoint = Vector2.new(1, 0.5)
-    SettingToggledIndicator.Name = "SettingToggledIndicator"
-    SettingToggledIndicator.Position = UDim2.new(0.9900000095367432, 0, 0.5, 0)
-    SettingToggledIndicator.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    SettingToggledIndicator.Size = UDim2.new(0, 20, 0, 20)
-    SettingToggledIndicator.BorderSizePixel = 0
-    SettingToggledIndicator.BackgroundColor3 = Color3.fromRGB(255, 80, 80)
-    SettingToggledIndicator.Parent = SettingToggleFrame
-
-    local STICorner = Instance.new("UICorner")
-    STICorner.Name = "STICorner"
-    STICorner.CornerRadius = UDim.new(1, 0)
-    STICorner.Parent = SettingToggledIndicator
 
     local SettingKeybindFrame = Instance.new("Frame")
     SettingKeybindFrame.BackgroundTransparency = 1
@@ -210,7 +169,55 @@ function UI:CreateSettings()
     DividerElement.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     DividerElement.Parent = SettingDividerFrame
 
-    return SettingsSectionFrame
+    local Elements = {}
+
+    function Elements:Toggle(name, def, cb)
+        local toggled = def or false
+
+        local SettingToggleFrame = Instance.new("Frame")
+        SettingToggleFrame.Name = "SettingToggleFrame"
+        SettingToggleFrame.Size = UDim2.new(0, 269, 0, 25)
+        SettingToggleFrame.BackgroundTransparency = 1
+        SettingToggleFrame.BorderSizePixel = 0
+        SettingToggleFrame.Parent = SettingsContainerSF
+
+        local SettingTitle = Instance.new("TextLabel")
+        SettingTitle.Name = "SettingTitle"
+        SettingTitle.Text = name or "Toggle Setting"
+        SettingTitle.Size = UDim2.new(0, 216, 0, 18)
+        SettingTitle.Position = UDim2.new(0, 0, 0.5, 0)
+        SettingTitle.AnchorPoint = Vector2.new(0, 0.5)
+        SettingTitle.BackgroundTransparency = 1
+        SettingTitle.TextXAlignment = Enum.TextXAlignment.Left
+        SettingTitle.TextScaled = true
+        SettingTitle.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+        SettingTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+        SettingTitle.Parent = SettingToggleFrame
+
+        local SettingToggledIndicator = Instance.new("Frame")
+        SettingToggledIndicator.Name = "SettingToggledIndicator"
+        SettingToggledIndicator.Size = UDim2.new(0, 20, 0, 20)
+        SettingToggledIndicator.AnchorPoint = Vector2.new(1, 0.5)
+        SettingToggledIndicator.Position = UDim2.new(0.99, 0, 0.5, 0)
+        SettingToggledIndicator.BorderSizePixel = 0
+        SettingToggledIndicator.BackgroundColor3 = toggled and Color3.fromRGB(80, 255, 80) or Color3.fromRGB(255, 80, 80)
+        SettingToggledIndicator.Parent = SettingToggleFrame
+
+        local STICorner = Instance.new("UICorner")
+        STICorner.CornerRadius = UDim.new(1, 0)
+        STICorner.Parent = SettingToggledIndicator
+
+        SettingToggleFrame.MouseButton1Click = SettingToggleFrame.MouseButton1Click or Instance.new("BindableEvent")
+        SettingToggleFrame.MouseButton1Click:Connect(function()
+            toggled = not toggled
+            SettingToggledIndicator.BackgroundColor3 = toggled and Color3.fromRGB(80, 255, 80) or Color3.fromRGB(255, 80, 80)
+            if cb then
+                cb(toggled)
+            end
+        end)
+    end
+
+    return Elements
 end
 
 return UI
